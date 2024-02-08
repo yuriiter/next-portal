@@ -1,0 +1,17 @@
+fragment SeoData on ComponentSharedSeo {
+  keywords
+  metaDescription
+  metaImage {
+    data {
+      id
+      attributes {
+        url
+      }
+    }
+  }
+  canonicalUrl
+  metaRobots
+  metaTitle
+  metaViewport
+  structuredData
+}

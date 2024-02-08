@@ -1,0 +1,53 @@
+.grid {
+  display: grid;
+
+  &--start {
+    justify-content: start;
+  }
+
+  &--end {
+    justify-content: end;
+  }
+
+  &--center {
+    justify-content: center;
+  }
+
+  &--stretch {
+    justify-content: stretch;
+  }
+
+  &--spaceAround {
+    justify-content: space-around;
+  }
+
+  &--spaceBetween {
+    justify-content: space-between;
+  }
+
+  &--spaceEvenly {
+    justify-content: space-evenly;
+  }
+
+  &__cell {
+    &--start {
+      justify-self: start;
+    }
+
+    &--end {
+      justify-self: end;
+    }
+
+    &--center {
+      justify-self: center;
+    }
+
+    &--stretch {
+      justify-self: stretch;
+    }
+
+    &--auto {
+      justify-self: auto;
+    }
+  }
+}

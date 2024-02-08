@@ -1,0 +1,25 @@
+query getContactPageData($location: JSON = "UA") {
+  contactPages(
+    filters: {
+      contentAttributes: {
+        isDeleted: { eq: false }
+        # language: { eq: $language }
+        or: [
+          { locations: { contains: "ALL" } }
+          { locations: { contains: $location } }
+        ]
+      }
+    }
+    pagination: { page: 0, pageSize: 1 }
+  ) {
+    data {
+      id
+      attributes {
+        content
+        seo {
+          ...SeoData
+        }
+      }
+    }
+  }
+}

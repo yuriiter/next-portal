@@ -1,0 +1,153 @@
+.rich-text {
+  color: #fff; /* Default text color */
+  line-height: 1.6;
+  font-size: 16px;
+  padding: 0 20px;
+
+  h1 {
+    font-size: 2.5rem;
+    margin: 1rem 0;
+    color: #eee; /* Heading color */
+  }
+
+  h2 {
+    font-size: 2rem;
+    margin: 0.8rem 0;
+    color: #ddd; /* Heading color */
+  }
+
+  h3 {
+    font-size: 1.8rem;
+    margin: 0.6rem 0;
+    color: #ccc; /* Heading color */
+  }
+
+  h4 {
+    font-size: 1.5rem;
+    margin: 0.4rem 0;
+    color: #bbb; /* Heading color */
+  }
+
+  h5 {
+    font-size: 1.3rem;
+    margin: 0.3rem 0;
+    color: #aaa; /* Heading color */
+  }
+
+  h6 {
+    font-size: 1.1rem;
+    margin: 0.2rem 0;
+    color: #999; /* Heading color */
+  }
+
+  p {
+    margin: 1rem 0;
+    /* Additional paragraph styles can be added here */
+  }
+
+  a {
+    color: #3498db; /* Link color */
+    text-decoration: underline;
+
+    &:hover {
+      color: #2980b9; /* Hover color */
+    }
+  }
+
+  ul,
+  ol {
+    margin: 1rem 0;
+
+    li {
+      margin: 0.5rem 0;
+      list-style-type: disc; /* Change to 'circle' or 'square' as desired */
+    }
+  }
+
+  blockquote {
+    margin: 0;
+    padding: 10px 20px;
+    background-color: #333; /* Blockquote background color */
+    border-left: 4px solid #ffcc00; /* Blockquote border color */
+    color: #ccc; /* Blockquote text color */
+    quotes: "\\201C" "\\201D" "\\2018" "\\2019"; /* Custom quote marks */
+    font-style: italic;
+
+    p {
+      margin: 0; /* Reset default margin for paragraphs within blockquote */
+    }
+  }
+
+  /* Additional styles for code blocks */
+  code {
+    font-family: "Courier New", monospace;
+    font-size: 0.9em;
+    padding: 0.2em 0.4em;
+    background-color: #333; /* Code block background color */
+    color: #fff; /* Code block text color */
+    border-radius: 4px;
+  }
+
+  pre {
+    overflow-x: auto;
+    padding: 1em;
+    background-color: #333; /* Preformatted text block background color */
+    color: #fff; /* Preformatted text block text color */
+    border-radius: 4px;
+
+    code {
+      display: block;
+      padding: 0;
+      font-size: 1em;
+    }
+  }
+
+  /* Adjust other rich-text elements as needed */
+
+  strong {
+    font-weight: bold;
+  }
+
+  em {
+    font-style: italic;
+  }
+
+  /* Styles for images */
+  img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin: 1rem 0;
+    border-radius: 4px; /* Optional: Rounded corners for images */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Optional: Image shadow */
+  }
+
+  /* Styles for tables */
+  table {
+    width: 100%;
+    margin: 1rem 0;
+    border-collapse: collapse;
+    border-spacing: 0;
+    background-color: #444; /* Table background color */
+    border-radius: 4px; /* Optional: Rounded corners for tables */
+    overflow: hidden; /* Optional: Hide table overflow */
+  }
+
+  th,
+  td {
+    padding: 0.5rem;
+    border: 1px solid #333; /* Table cell border color */
+    color: #fff; /* Table cell text color */
+  }
+
+  /* Adjustments for table header cells */
+  th {
+    background-color: #222; /* Table header background color */
+    font-weight: bold;
+  }
+
+  /* Optional striped table rows */
+  tr:nth-child(even) {
+    background-color: #333; /* Even row background color */
+  }
+}

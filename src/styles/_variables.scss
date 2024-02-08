@@ -1,0 +1,16 @@
+$sidebar-width: 250px;
+$sidebar-width-before-bp: 220px;
+$sidebar-height-mobile: 100px;
+
+$color-content: #1d2329;
+$color-sidebar: #16191c;
+$color-primary: #2749f1;
+
+$breakpoints: (
+  sx: 370px,
+  sm: 577px,
+  md: 768px,
+  lg: 992px,
+  xl: 1200px,
+  xxl: 1400px,
+);

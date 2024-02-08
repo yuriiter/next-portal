@@ -1,0 +1,63 @@
+query getListPageData(
+  $location: JSON = "UA"
+  # $language: String = "UA"
+  $urlSlug: String!
+) {
+  listPages(
+    filters: {
+      contentAttributes: {
+        isDeleted: { eq: false }
+        # language: { eq: $language }
+        or: [
+          { locations: { contains: "ALL" } }
+          { locations: { contains: $location } }
+        ]
+      }
+      urlSlug: { eq: $urlSlug }
+    }
+    pagination: { page: 0, pageSize: 1 }
+  ) {
+    data {
+      id
+      attributes {
+        title
+        content
+        games {
+          data {
+            id
+            attributes {
+              urlSlug
+              name
+              rating
+              img {
+                data {
+                  attributes {
+                    url
+                    alternativeText
+                  }
+                }
+              }
+            }
+          }
+        }
+        seo {
+          ...SeoData
+        }
+      }
+    }
+  }
+}
+
+query getPossibleListPages {
+  listPages(filters: { contentAttributes: { isDeleted: { eq: false } } }) {
+    data {
+      id
+      attributes {
+        urlSlug
+        contentAttributes {
+          locations
+        }
+      }
+    }
+  }
+}

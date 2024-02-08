@@ -1,0 +1,45 @@
+query getArticlePageData(
+  $location: JSON = "UA"
+  # $language: String = "UA"
+  $urlSlug: String!
+) {
+  articlePages(
+    filters: {
+      contentAttributes: {
+        isDeleted: { eq: false }
+        # language: { eq: $language }
+        or: [
+          { locations: { contains: "ALL" } }
+          { locations: { contains: $location } }
+        ]
+      }
+      urlSlug: { eq: $urlSlug }
+    }
+    pagination: { page: 0, pageSize: 1 }
+  ) {
+    data {
+      id
+      attributes {
+        title
+        content
+        seo {
+          ...SeoData
+        }
+      }
+    }
+  }
+}
+
+query getPossibleArticlePages {
+  articlePages(filters: { contentAttributes: { isDeleted: { eq: false } } }) {
+    data {
+      id
+      attributes {
+        urlSlug
+        contentAttributes {
+          locations
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,11 @@
+.stack-button {
+  @apply bg-banner-dark px-2 py-2 bg-opacity-40;
+}
+
+.stack-post:hover > div .stack-button {
+  @apply bg-white text-black;
+}
+
+.low-button {
+  @apply py-2;
+}

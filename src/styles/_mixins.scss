@@ -1,0 +1,63 @@
+@mixin scrollbar($show_always: false, $width: 3px) {
+  $background-color: transparent;
+  $thumb-color: $color-primary;
+  $hover-thumb-color: rgba($color-primary, 0.7);
+
+  &::-webkit-scrollbar {
+    width: $width;
+    height: $width;
+    background-color: transparent;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: transparent;
+    border-radius: 10px;
+    transition: background-color 0.3s ease;
+  }
+
+  @if $show_always {
+    &::-webkit-scrollbar {
+      background-color: $background-color;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background-color: $thumb-color;
+
+      &:hover {
+        background-color: $hover-thumb-color;
+      }
+    }
+  }
+
+  &:hover {
+    &::-webkit-scrollbar {
+      background-color: $background-color;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background-color: $thumb-color;
+
+      &:hover {
+        background-color: $hover-thumb-color;
+      }
+    }
+  }
+}
+
+@mixin mq($bp, $max_or_min: "max") {
+  $width: $bp;
+
+  @if map-has-key($breakpoints, $bp) {
+    $width: map-get($breakpoints, $bp);
+  }
+
+  @if $max_or_min == "max" {
+    @media (max-width: $width) {
+      @content;
+    }
+  } @else {
+    @media (min-width: $width) {
+      @content;
+    }
+  }
+}

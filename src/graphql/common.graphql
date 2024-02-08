@@ -1,0 +1,273 @@
+query getCommonData($location: JSON = "UA") {
+  # Get top banners data
+  topBanners: games(
+    filters: {
+      contentAttributes: {
+        isDeleted: { eq: false }
+        # language: { eq: $language }
+        or: [
+          { locations: { contains: "ALL" } }
+          { locations: { contains: $location } }
+        ]
+      }
+      showInTopBannersComponent: { eq: true }
+    }
+    pagination: { page: 0, pageSize: 4 }
+  ) {
+    data {
+      id
+      attributes {
+        name
+        img {
+          data {
+            attributes {
+              url
+              alternativeText
+            }
+          }
+        }
+        urlSlug
+      }
+    }
+  }
+
+  # Get side banners data
+  sideBanners: games(
+    filters: {
+      contentAttributes: {
+        isDeleted: { eq: false }
+        # language: { eq: $language }
+        or: [
+          { locations: { contains: "ALL" } }
+          { locations: { contains: $location } }
+        ]
+      }
+      showInSideBannersComponent: { eq: true }
+    }
+    pagination: { page: 0, pageSize: 5 }
+  ) {
+    data {
+      id
+      attributes {
+        name
+        img {
+          data {
+            attributes {
+              url
+              alternativeText
+            }
+          }
+        }
+        urlSlug
+        rating
+      }
+    }
+  }
+
+  # Get side news data
+  sideNewsPosts: articlePages(
+    filters: {
+      contentAttributes: {
+        isDeleted: { eq: false }
+        # language: { eq: $language }
+        or: [
+          { locations: { contains: "ALL" } }
+          { locations: { contains: $location } }
+        ]
+      }
+      showInNewsComponent: { eq: true }
+    }
+    pagination: { page: 0, pageSize: 10 }
+  ) {
+    data {
+      id
+      attributes {
+        title
+        urlSlug
+        createdAt
+      }
+    }
+  }
+
+  # Get sidebar links
+  sidebarArticles: articlePages(
+    filters: {
+      contentAttributes: {
+        isDeleted: { eq: false }
+        # language: { eq: $language }
+        or: [
+          { locations: { contains: "ALL" } }
+          { locations: { contains: $location } }
+        ]
+      }
+      showInSidebarComponent: { eq: true }
+    }
+  ) {
+    data {
+      id
+      attributes {
+        urlSlug
+        shortName
+      }
+    }
+  }
+
+  sidebarListPages: listPages(
+    filters: {
+      contentAttributes: {
+        isDeleted: { eq: false }
+        # language: { eq: $language }
+        or: [
+          { locations: { contains: "ALL" } }
+          { locations: { contains: $location } }
+        ]
+      }
+    }
+  ) {
+    data {
+      id
+      attributes {
+        urlSlug
+        shortName
+      }
+    }
+  }
+
+  topGamesLinks: games(
+    filters: {
+      contentAttributes: {
+        isDeleted: { eq: false }
+        # language: { eq: $language }
+        or: [
+          { locations: { contains: "ALL" } }
+          { locations: { contains: $location } }
+        ]
+      }
+      showInTopGames: { eq: true }
+    }
+  ) {
+    data {
+      id
+      attributes {
+        name
+        urlSlug
+        img {
+          data {
+            attributes {
+              url
+              alternativeText
+            }
+          }
+        }
+      }
+    }
+  }
+
+  # Get footer links
+  articlesLinksForFooter: articlePages(
+    filters: {
+      contentAttributes: {
+        isDeleted: { eq: false }
+        # language: { eq: $language }
+        or: [
+          { locations: { contains: "ALL" } }
+          { locations: { contains: $location } }
+        ]
+      }
+      showInFooterComponent: { eq: true }
+    }
+  ) {
+    data {
+      id
+      attributes {
+        urlSlug
+        shortName
+      }
+    }
+  }
+
+  listPagesLinksForFooter: listPages(
+    filters: {
+      contentAttributes: {
+        isDeleted: { eq: false }
+        # language: { eq: $language }
+        or: [
+          { locations: { contains: "ALL" } }
+          { locations: { contains: $location } }
+        ]
+      }
+      showInFooterComponent: { eq: true }
+    }
+  ) {
+    data {
+      id
+      attributes {
+        urlSlug
+        shortName
+      }
+    }
+  }
+
+  footerLinks(
+    filters: {
+      contentAttributes: {
+        isDeleted: { eq: false }
+        # language: { eq: $language }
+        or: [
+          { locations: { contains: "ALL" } }
+          { locations: { contains: $location } }
+        ]
+      }
+    }
+  ) {
+    data {
+      id
+      attributes {
+        link {
+          href
+          text
+        }
+      }
+    }
+  }
+}
+
+query getTableBanners($location: JSON = "Ukraine") {
+  tableBanners: games(
+    filters: {
+      contentAttributes: {
+        isDeleted: { eq: false }
+        # language: { eq: $language }
+        or: [
+          { locations: { contains: "ALL" } }
+          { locations: { contains: $location } }
+        ]
+      }
+      showInTableComponent: { eq: true }
+    }
+    pagination: { page: 0, pageSize: 10 }
+  ) {
+    data {
+      id
+      attributes {
+        name
+        img {
+          data {
+            attributes {
+              url
+              alternativeText
+            }
+          }
+        }
+        urlSlug
+        bonus
+        creationYear
+        description
+        interfaceLanguage
+        rating
+        site
+        soft
+      }
+    }
+  }
+}
