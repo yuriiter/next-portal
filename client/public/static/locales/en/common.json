@@ -1,0 +1,50 @@
+{
+  "caption-near-logo": "Gaming rating",
+  "top-games-title": "Top Games",
+  "best-gaming-clubs": "Best Gaming Platforms",
+  "no-data": "No data...",
+  "top-games-table-header": "Explore the top gaming platforms: ratings and top 10 games",
+  "table-place": "Place",
+  "table-game": "Gaming Platform",
+  "table-bonus": "Bonus",
+  "table-soft": "Software",
+  "table-review": "Review",
+  "table-website": "Website",
+
+  "button-show-game-rating": "Show Gaming Platform Ratings",
+  "button-see-all": "See All",
+  "button-show-more": "Show More",
+  "button-more-details": "More Details",
+  "button-review": "Review",
+  "button-play": "Play",
+  "button-go-to-game": "Go to Platform",
+  "button-send-request": "Send Request",
+  "button-read": "Read",
+  "button-go-to-main-page": "Go to Main Page",
+
+  "not-found-caption": "Page Not Found",
+  "footer-caption": "Level Up Your Experience with Us - Your Ultimate Gaming Destination",
+
+  "side-posts-header": "Best Platforms",
+  "side-posts-no-data": "No posts lately",
+  "side-news-header": "News",
+  "side-news-no-data": "No news lately",
+
+  "game-review-of": "Review of",
+  "game-address": "Platform Address",
+  "game-interface-language": "Interface Language",
+  "game-creation-year": "Creation Year",
+  "game-software": "Software",
+  "game-bonus": "Bonus",
+
+  "contact-form-title": "If you have any questions, please fill out the feedback form:",
+  "contact-input-name": "Name",
+  "contact-input-question": "Your Question",
+
+  "resource-not-exists": "Resource Doesn't Exist",
+  "loading": "Loading...",
+  "contact-page-link-text": "Contact Us",
+  "email-sent-error": "An Error Occurred",
+  "email-sent-success": "Successfully Sent",
+  "sitemap": "Sitemap"
+}

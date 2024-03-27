@@ -1,0 +1,40 @@
+version: "3"
+
+services:
+  client:
+    restart: on-failure
+    build:
+      context: .
+      target: client_build
+    hostname: client
+    expose:
+      - 3000
+
+  strapi:
+    restart: on-failure
+    build:
+      context: .
+      target: strapi_production
+    hostname: strapi
+    env_file:
+      - ./strapi/.env
+      - ./strapi/.env.production
+    expose:
+      - 1337
+
+  nginx:
+    build:
+      context: .
+      target: nginx
+    links:
+      - strapi
+      - client
+    depends_on:
+      - client
+      - strapi
+    ports:
+      - "80:80"
+      - "443:443"
+
+volumes:
+  db_volume:
