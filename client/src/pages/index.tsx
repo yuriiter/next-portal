@@ -25,7 +25,7 @@ import {
 import { useOptionalFactory } from "@/hooks/useOptionalFactory";
 import { ShowMoreButton } from "@/components/ShowMoreButton";
 import { useCommonData } from "@/hooks/useCommonData";
-import { useTranslation, withTranslation } from "next-i18next";
+import { withTranslation } from "next-i18next";
 
 type HomeProps = {
   commonData: GetCommonDataQuery;
@@ -34,19 +34,17 @@ type HomeProps = {
 };
 
 function Home({ commonData, tableBannersData, homePageData, t }: HomeProps) {
-  // const { t } = useTranslation();
-
   const homePage = homePageData.indexPages?.data?.[0];
   const tableData = useOptionalFactory(
     tableBannersData?.tableBanners?.data.map((bannersData) => ({
       ...bannersData.attributes,
     })),
-    [tableBannersData]
+    [tableBannersData],
   );
 
   const pageContent = homePage?.attributes?.content;
   const [showAll, setShowAll] = useState(
-    tableData?.length ? tableData.length < 6 : true
+    tableData?.length ? tableData.length < 6 : true,
   );
 
   const onShowAllButtonClick = () => setShowAll(true);
@@ -121,9 +119,9 @@ export const getStaticProps: GetStaticProps<HomeProps> = async ({ locale }) => {
       commonData: commonDataResponse?.data ?? {},
       tableBannersData: tableBannersDataResponse?.data ?? {},
       homePageData: homePageDataResponse?.data ?? {},
-      ...(await serverSideTranslations(locale, ["common"])),
+      ...(await serverSideTranslations(locale ?? "EN", ["common"])),
     },
-    revalidate: false,
+    revalidate: 60,
   };
 };
 

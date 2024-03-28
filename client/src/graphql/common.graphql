@@ -1,14 +1,14 @@
-query getCommonData($location: JSON = "UA") {
+query getCommonData($location: String = "UA") {
   # Get top banners data
   topBanners: games(
     filters: {
       contentAttributes: {
         isDeleted: { eq: false }
-        # language: { eq: $language }
-        or: [
-          { locations: { contains: "ALL" } }
-          { locations: { contains: $location } }
-        ]
+        language: { eq: $location }
+        # or: [
+        #   { locations: { contains: "ALL" } }
+        #   { locations: { contains: $location } }
+        # ]
       }
       showInTopBannersComponent: { eq: true }
     }
@@ -36,11 +36,11 @@ query getCommonData($location: JSON = "UA") {
     filters: {
       contentAttributes: {
         isDeleted: { eq: false }
-        # language: { eq: $language }
-        or: [
-          { locations: { contains: "ALL" } }
-          { locations: { contains: $location } }
-        ]
+        language: { eq: $location }
+        # or: [
+        #   { locations: { contains: "ALL" } }
+        #   { locations: { contains: $location } }
+        # ]
       }
       showInSideBannersComponent: { eq: true }
     }
@@ -69,11 +69,11 @@ query getCommonData($location: JSON = "UA") {
     filters: {
       contentAttributes: {
         isDeleted: { eq: false }
-        # language: { eq: $language }
-        or: [
-          { locations: { contains: "ALL" } }
-          { locations: { contains: $location } }
-        ]
+        language: { eq: $location }
+        # or: [
+        #   { locations: { contains: "ALL" } }
+        #   { locations: { contains: $location } }
+        # ]
       }
       showInNewsComponent: { eq: true }
     }
@@ -94,11 +94,11 @@ query getCommonData($location: JSON = "UA") {
     filters: {
       contentAttributes: {
         isDeleted: { eq: false }
-        # language: { eq: $language }
-        or: [
-          { locations: { contains: "ALL" } }
-          { locations: { contains: $location } }
-        ]
+        language: { eq: $location }
+        # or: [
+        #   { locations: { contains: "ALL" } }
+        #   { locations: { contains: $location } }
+        # ]
       }
       showInSidebarComponent: { eq: true }
     }
@@ -116,11 +116,11 @@ query getCommonData($location: JSON = "UA") {
     filters: {
       contentAttributes: {
         isDeleted: { eq: false }
-        # language: { eq: $language }
-        or: [
-          { locations: { contains: "ALL" } }
-          { locations: { contains: $location } }
-        ]
+        language: { eq: $location }
+        # or: [
+        #   { locations: { contains: "ALL" } }
+        #   { locations: { contains: $location } }
+        # ]
       }
     }
   ) {
@@ -137,11 +137,11 @@ query getCommonData($location: JSON = "UA") {
     filters: {
       contentAttributes: {
         isDeleted: { eq: false }
-        # language: { eq: $language }
-        or: [
-          { locations: { contains: "ALL" } }
-          { locations: { contains: $location } }
-        ]
+        language: { eq: $location }
+        # or: [
+        #   { locations: { contains: "ALL" } }
+        #   { locations: { contains: $location } }
+        # ]
       }
       showInTopGames: { eq: true }
     }
@@ -168,11 +168,11 @@ query getCommonData($location: JSON = "UA") {
     filters: {
       contentAttributes: {
         isDeleted: { eq: false }
-        # language: { eq: $language }
-        or: [
-          { locations: { contains: "ALL" } }
-          { locations: { contains: $location } }
-        ]
+        language: { eq: $location }
+        # or: [
+        #   { locations: { contains: "ALL" } }
+        #   { locations: { contains: $location } }
+        # ]
       }
       showInFooterComponent: { eq: true }
     }
@@ -190,11 +190,11 @@ query getCommonData($location: JSON = "UA") {
     filters: {
       contentAttributes: {
         isDeleted: { eq: false }
-        # language: { eq: $language }
-        or: [
-          { locations: { contains: "ALL" } }
-          { locations: { contains: $location } }
-        ]
+        language: { eq: $location }
+        # or: [
+        #   { locations: { contains: "ALL" } }
+        #   { locations: { contains: $location } }
+        # ]
       }
       showInFooterComponent: { eq: true }
     }
@@ -212,11 +212,11 @@ query getCommonData($location: JSON = "UA") {
     filters: {
       contentAttributes: {
         isDeleted: { eq: false }
-        # language: { eq: $language }
-        or: [
-          { locations: { contains: "ALL" } }
-          { locations: { contains: $location } }
-        ]
+        language: { eq: $location }
+        # or: [
+        #   { locations: { contains: "ALL" } }
+        #   { locations: { contains: $location } }
+        # ]
       }
     }
   ) {
@@ -232,16 +232,16 @@ query getCommonData($location: JSON = "UA") {
   }
 }
 
-query getTableBanners($location: JSON = "Ukraine") {
+query getTableBanners($location: String = "Ukraine") {
   tableBanners: games(
     filters: {
       contentAttributes: {
         isDeleted: { eq: false }
-        # language: { eq: $language }
-        or: [
-          { locations: { contains: "ALL" } }
-          { locations: { contains: $location } }
-        ]
+        language: { eq: $location }
+        # or: [
+        #   { locations: { contains: "ALL" } }
+        #   { locations: { contains: $location } }
+        # ]
       }
       showInTableComponent: { eq: true }
     }

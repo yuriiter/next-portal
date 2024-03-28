@@ -1,13 +1,13 @@
-query getHomePageData($location: JSON = "UA") {
+query getHomePageData($location: String = "UA") {
   indexPages(
     filters: {
       contentAttributes: {
         isDeleted: { eq: false }
-        # language: { eq: $language }
-        or: [
-          { locations: { contains: "ALL" } }
-          { locations: { contains: $location } }
-        ]
+        language: { eq: $location }
+        # or: [
+        #   { locations: { contains: "ALL" } }
+        #   { locations: { contains: $location } }
+        # ]
       }
     }
     pagination: { page: 0, pageSize: 1 }

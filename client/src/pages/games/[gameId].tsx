@@ -167,6 +167,6 @@ export const getStaticProps: GetStaticProps<ReviewProps> = async ({
       reviewPageData: reviewPageDataResponse?.data ?? {},
       ...(await serverSideTranslations(locale as string)),
     },
-    revalidate: false,
+    revalidate: 60,
   };
 };

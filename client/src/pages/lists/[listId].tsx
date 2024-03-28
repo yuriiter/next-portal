@@ -46,7 +46,7 @@ export default function ListPage({ commonData, listPageData }: ListPageProps) {
         href: `/games/${urlSlug}`,
         img: buildMediaUrl(img.data.attributes.url),
         text: name,
-      })
+      }),
     ) ?? [];
 
   const {
@@ -60,7 +60,7 @@ export default function ListPage({ commonData, listPageData }: ListPageProps) {
 
   const isSmallScreen = useMQ(1150, "max");
   const [showAllGridBanners, setShowAllGridBanners] = useState(
-    gridBanners?.length < 6
+    gridBanners?.length < 6,
   );
   const onShowAllGridBanners = () => setShowAllGridBanners(true);
 
@@ -194,6 +194,6 @@ export const getStaticProps: GetStaticProps<ListPageProps> = async ({
       listPageData: listPageDataResponse?.data ?? {},
       ...(await serverSideTranslations(locale as string)),
     },
-    revalidate: false,
+    revalidate: 60,
   };
 };

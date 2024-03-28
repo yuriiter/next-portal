@@ -46,12 +46,12 @@ export default function Contact({
     tableBannersData?.tableBanners?.data.map((bannersData) => ({
       ...bannersData.attributes,
     })),
-    [tableBannersData]
+    [tableBannersData],
   );
   const { topBanners, mainLinks, topGames, footerLinks } =
     useCommonData(commonData);
   const [showAll, setShowAll] = useState(
-    tableData?.length ? tableData.length < 6 : true
+    tableData?.length ? tableData.length < 6 : true,
   );
 
   const onShowAllButtonClick = () => setShowAll(true);
@@ -128,6 +128,6 @@ export const getStaticProps: GetStaticProps<ContactProps> = async ({
       contactPageData: contactPageDataResponse?.data ?? {},
       ...(await serverSideTranslations(locale)),
     },
-    revalidate: false,
+    revalidate: 60,
   };
 };

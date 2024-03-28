@@ -88,7 +88,7 @@ export const Article = ({ game: gameData }: GameArticleProps) => {
         </div>
       </div>
       <Divider />
-      <RichText>{gameData.description}</RichText>
+      <RichText>{gameData.content}</RichText>
     </div>
   );
 };

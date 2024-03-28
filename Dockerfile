@@ -1,5 +1,5 @@
 #### strapi images
-FROM node:20-alpine AS strapi_base
+FROM node:20.12-alpine AS strapi_base
 
 WORKDIR /app
 
@@ -23,7 +23,7 @@ CMD ["npm", "run", "start"]
 
 
 #### Client images
-FROM node:20-alpine AS client_base
+FROM node:20.12-alpine AS client_base
 
 WORKDIR /app
 

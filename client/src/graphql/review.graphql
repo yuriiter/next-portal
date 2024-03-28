@@ -1,5 +1,5 @@
 query getReviewPageData(
-  $location: JSON = "UA"
+  $location: String = "UA"
   # $language: String = "UA"
   $urlSlug: String!
 ) {
@@ -7,11 +7,11 @@ query getReviewPageData(
     filters: {
       contentAttributes: {
         isDeleted: { eq: false }
-        # language: { eq: $language }
-        or: [
-          { locations: { contains: "ALL" } }
-          { locations: { contains: $location } }
-        ]
+        language: { eq: $location }
+        # or: [
+        #   { locations: { contains: "ALL" } }
+        #   { locations: { contains: $location } }
+        # ]
       }
       urlSlug: { eq: $urlSlug }
     }

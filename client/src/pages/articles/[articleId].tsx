@@ -163,6 +163,6 @@ export const getStaticProps: GetStaticProps<ArticleProps> = async ({
       articlePageData: articlePageDataResponse?.data ?? {},
       ...(await serverSideTranslations(locale as string)),
     },
-    revalidate: false,
+    revalidate: 60,
   };
 };

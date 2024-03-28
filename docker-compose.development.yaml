@@ -2,6 +2,7 @@ version: "3"
 
 services:
   strapi:
+    hostname: strapi
     env_file:
       - strapi/.env
     build:
@@ -13,11 +14,14 @@ services:
       - /app/node_modules
 
   client:
+    hostname: client
     build:
       target: client_development
     ports:
       - "3000:3000"
     depends_on:
+      - strapi
+    links:
       - strapi
     volumes:
       - ./client:/app
