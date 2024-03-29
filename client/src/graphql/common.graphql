@@ -15,6 +15,7 @@ query getCommonData($location: String = "UA") {
     pagination: { page: 0, pageSize: 4 }
   ) {
     data {
+      name
       id
       attributes {
         name

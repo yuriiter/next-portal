@@ -4,22 +4,18 @@ import { buildMediaUrl } from "@/utils/utils";
 
 export const useCommonData = (commonData: GetCommonDataQuery) => {
   const topBanners = useOptionalFactory(
-    commonData?.topBanners?.data
-      .map((topBannerData) => {
-        const img = buildMediaUrl(
-          topBannerData.attributes?.img.data?.attributes?.url ?? "",
-        );
-        const href = `/games/${topBannerData.attributes?.urlSlug}`;
-        const imgAlt =
-          topBannerData.attributes?.img.data?.attributes?.alternativeText;
+    commonData?.topBanners?.data.map((topBannerData) => {
+      const img = buildMediaUrl(
+        topBannerData.attributes?.img.data?.attributes?.url ?? "",
+      );
+      const href = `/games/${topBannerData.attributes?.urlSlug}`;
 
-        return {
-          img: img as string,
-          href,
-          text: imgAlt as string,
-        };
-      })
-      .filter((data) => !Object.values(data).some((val) => !val)) ?? [],
+      return {
+        img: img as string,
+        href,
+        text: topBannerData.attributes?.name,
+      };
+    }),
     [commonData],
   );
 
