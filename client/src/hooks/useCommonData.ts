@@ -84,10 +84,24 @@ export const useCommonData = (commonData: GetCommonDataQuery) => {
     }) ?? [],
     [commonData],
   );
-
   const footerLinks = useOptionalFactory(
-    commonData?.footerLinks?.data.map(({ attributes }) => attributes?.link) ??
-      [],
+    [
+      ...commonData?.footerLinks?.data.map(
+        ({ attributes }) => attributes?.link,
+      ),
+      ...commonData?.articlesLinksForFooter?.data.map(
+        ({ attributes: { urlSlug, shortName } }) => ({
+          href: urlSlug,
+          text: shortName,
+        }),
+      ),
+      ...commonData?.listPagesLinksForFooter?.data.map(
+        ({ attributes: { urlSlug, shortName } }) => ({
+          href: urlSlug,
+          text: shortName,
+        }),
+      ),
+    ],
     [commonData],
   );
 

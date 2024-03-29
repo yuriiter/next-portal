@@ -13,8 +13,6 @@ type TopBannersProps = {
 export const TopBanners = ({ title, button, banners }: TopBannersProps) => {
   const { t } = useTranslation();
 
-  console.log("bp1", banners);
-
   return (
     <div className="w-full flex flex-wrap gap-10 items-center">
       <div className="grow flex basis-[300px] gap-7 flex-col">
