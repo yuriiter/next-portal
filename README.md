@@ -12,3 +12,21 @@ Welcome to the Next.js application repository! This application is built using N
 - **Nodemailer**: Incorporate Nodemailer for sending emails and managing communication.
 - **GraphQL Codegen**: Generate TypeScript types based on GraphQL schema for improved type safety and development experience.
 - **Sitemap Generation**: Automatically generate sitemap to improve search engine indexing and discoverability.
+
+## Development
+
+To run the app in a development environment, use the following commands:
+
+```bash
+docker-compose -f docker-compose.development.yaml build
+docker-compose -f docker-compose.development.yaml up
+```
+
+## Production
+
+For production deployment, use the following commands:
+
+```bash
+docker-compose -f docker-compose.production.yaml build
+docker-compose -f docker-compose.production.yaml up -d
+```
