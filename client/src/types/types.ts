@@ -6,6 +6,6 @@ export type PropsWithClassName = {
 
 export type LinkData<CustomData extends Record<string, unknown> = {}> = {
   href: string;
-  text: string;
-  img: string | StaticImageData;
+  text: string | undefined;
+  img: string | StaticImageData | undefined;
 } & CustomData;

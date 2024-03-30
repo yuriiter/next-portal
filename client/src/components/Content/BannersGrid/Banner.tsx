@@ -13,6 +13,9 @@ type BannerProps = {
 
 export const Banner = ({ banner, className }: BannerProps) => {
   const { t } = useTranslation();
+
+  if (!banner.img || !banner.text) return;
+
   return (
     <Link
       href={`${banner.href}`}

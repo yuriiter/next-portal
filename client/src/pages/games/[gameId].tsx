@@ -8,7 +8,7 @@ import { PostsStack } from "@/components/Content/PostsStack/PostsStack";
 import { WithHeader } from "@/components/Content/WithHeader";
 import { Layout } from "@/components/Layout/Layout";
 import { useMQ } from "@/hooks/mediaQueries/useMQ";
-import { GetStaticPaths, GetStaticProps } from "next";
+import { GetStaticProps, GetStaticPropsContext } from "next";
 import {
   GetCommonDataDocument,
   GetCommonDataQuery,
@@ -74,7 +74,7 @@ export default function Review({ commonData, reviewPageData }: ReviewProps) {
                     href: "/",
                     text: t("button-show-game-rating"),
                   }}
-                  banners={topBanners}
+                  banners={topBanners ?? []}
                 />
               </WrapperContainer>
             </Wrapper>
@@ -117,7 +117,7 @@ export default function Review({ commonData, reviewPageData }: ReviewProps) {
   );
 }
 
-export const getStaticPaths: GetStaticPaths = async ({ locales }) => {
+export const getStaticPaths = async ({ locales }: GetStaticPropsContext) => {
   const { client } = getUrqlClient();
 
   const reviewPageDataResponse = await client.query<
@@ -129,7 +129,9 @@ export const getStaticPaths: GetStaticPaths = async ({ locales }) => {
   const reviews = reviewPageDataResponse?.data?.games?.data ?? [];
 
   // Generate paths based on the fetched data
-  const paths = reviews.flatMap(({ attributes: { urlSlug } }) => {
+  const paths = reviews.flatMap(({ attributes }) => {
+    if (!attributes) return;
+    const { urlSlug } = attributes;
     return locales?.map((locale) => ({
       params: { gameId: urlSlug },
       locale,

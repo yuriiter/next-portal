@@ -9,15 +9,13 @@ import { RichText } from "../RichText";
 import { buildMediaUrl, isDefined } from "@/utils/utils";
 import { useTranslation } from "next-i18next";
 import { useOptionalFactory } from "@/hooks/useOptionalFactory";
+import { GetReviewPageDataQuery } from "@/generated/graphql";
 
-type GameData = RowDataType & {
-  description: string;
-  interfaceLanguage: string;
-  creationYear: number;
-};
+type GameData = Partial<RowDataType> &
+  NonNullable<GetReviewPageDataQuery["games"]>["data"][number]["attributes"];
 
 type GameArticleProps = {
-  game: GameData;
+  game: GameData | undefined | null;
 };
 
 export const Article = ({ game: gameData }: GameArticleProps) => {
@@ -88,7 +86,7 @@ export const Article = ({ game: gameData }: GameArticleProps) => {
         </div>
       </div>
       <Divider />
-      <RichText>{gameData.content}</RichText>
+      <RichText>{gameData?.content ?? ""}</RichText>
     </div>
   );
 };

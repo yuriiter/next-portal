@@ -12,7 +12,7 @@ import { PostsStack } from "@/components/Content/PostsStack/PostsStack";
 import { WithHeader } from "@/components/Content/WithHeader";
 import { Layout } from "@/components/Layout/Layout";
 import { useMQ } from "@/hooks/mediaQueries/useMQ";
-import { GetStaticPaths, GetStaticProps } from "next";
+import { GetStaticPathsContext, GetStaticProps } from "next";
 import {
   GetCommonDataDocument,
   GetCommonDataQuery,
@@ -29,6 +29,7 @@ import { useCommonData } from "@/hooks/useCommonData";
 import { buildMediaUrl } from "@/utils/utils";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { useTranslation } from "next-i18next";
+import { LinkData } from "@/types/types";
 
 type ListPageProps = {
   commonData: GetCommonDataQuery;
@@ -40,14 +41,20 @@ export default function ListPage({ commonData, listPageData }: ListPageProps) {
 
   const listPage = listPageData?.listPages?.data[0];
   const gridBanners =
-    listPage?.attributes?.games?.data.map(
-      ({ attributes: { rating, urlSlug, name, img } }) => ({
-        rating,
-        href: `/games/${urlSlug}`,
-        img: buildMediaUrl(img.data.attributes.url),
-        text: name,
-      }),
-    ) ?? [];
+    (listPage?.attributes?.games?.data
+      .map(({ attributes }) => {
+        if (!attributes) return;
+
+        const { rating, urlSlug, name, img } = attributes;
+
+        return {
+          rating,
+          href: `/games/${urlSlug}`,
+          img: buildMediaUrl(img.data?.attributes?.url),
+          text: name,
+        };
+      })
+      ?.filter(Boolean) as LinkData<{ rating: number }>[]) ?? [];
 
   const {
     mainLinks,
@@ -117,7 +124,7 @@ export default function ListPage({ commonData, listPageData }: ListPageProps) {
                       {t("button-show-more")}
                     </Button>
                   )}
-                  <RichText>{listPage?.attributes.content ?? ""}</RichText>
+                  <RichText>{listPage?.attributes?.content ?? ""}</RichText>
                 </WrapperContainer>
               </WithHeader>
             </Wrapper>
@@ -145,7 +152,7 @@ export default function ListPage({ commonData, listPageData }: ListPageProps) {
   );
 }
 
-export const getStaticPaths: GetStaticPaths = async ({ locales }) => {
+export const getStaticPaths = async ({ locales }: GetStaticPathsContext) => {
   const { client } = getUrqlClient();
 
   const listPageDataResponse = await client.query<
@@ -156,12 +163,17 @@ export const getStaticPaths: GetStaticPaths = async ({ locales }) => {
   // Extract the necessary data to create paths
   const lists = listPageDataResponse?.data?.listPages?.data ?? [];
 
-  const paths = lists.flatMap(({ attributes: { urlSlug } }) => {
-    return locales?.map((locale) => ({
-      params: { listId: urlSlug },
-      locale,
-    }));
-  });
+  const paths = lists
+    .flatMap(({ attributes }) => {
+      if (!attributes) return;
+      const { urlSlug } = attributes;
+
+      return locales?.map((locale) => ({
+        params: { listId: urlSlug },
+        locale,
+      }));
+    })
+    .filter(Boolean);
 
   return {
     paths,
@@ -178,7 +190,7 @@ export const getStaticProps: GetStaticProps<ListPageProps> = async ({
   const commonDataResponse = await client.query<
     GetCommonDataQuery,
     GetCommonDataQueryVariables
-  >(GetCommonDataDocument, { location: locale.toUpperCase() });
+  >(GetCommonDataDocument, { location: locale?.toUpperCase() ?? "EN" });
 
   const listPageDataResponse = await client.query<
     GetListPageDataQuery,

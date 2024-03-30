@@ -32,7 +32,7 @@ export const TopBanner = ({
             height={70}
             src={img}
             className="w-full h-3/4 object-cover"
-            alt={text}
+            alt={text ?? ""}
           />
         )}
         <div className="grow flex flex-col justify-center">
@@ -55,7 +55,7 @@ export const TopBanner = ({
             height={70}
             src={img}
             className="w-full h-3/4 object-cover"
-            alt={text}
+            alt={text ?? ""}
           />
         )}
         <div className="grow flex flex-col justify-center">

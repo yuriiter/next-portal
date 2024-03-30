@@ -20,10 +20,10 @@ export const PostsStack = ({ posts, className, title }: PostsStackProps) => {
           posts.map(({ rating, href, text, img }, idx) => (
             <PostsStackPost
               key={idx}
-              text={text}
+              text={text ?? ""}
               href={href}
               rating={rating}
-              img={img}
+              img={img ?? ""}
             />
           ))
         ) : (

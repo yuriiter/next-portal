@@ -1,5 +1,5 @@
 import { TopBanners } from "@/components/Content/TopBanners";
-import { TableContent } from "@/components/Content/TableContent";
+import { RowDataType, TableContent } from "@/components/Content/TableContent";
 import { Wrapper } from "@/components/Content/Wrapper";
 import { WrapperContainer } from "@/components/Content/WrapperContainer";
 import { Grid } from "@/components/Grid/Grid";
@@ -25,7 +25,7 @@ import {
 import { useOptionalFactory } from "@/hooks/useOptionalFactory";
 import { ShowMoreButton } from "@/components/ShowMoreButton";
 import { useCommonData } from "@/hooks/useCommonData";
-import { withTranslation } from "next-i18next";
+import { useTranslation, withTranslation } from "next-i18next";
 
 type HomeProps = {
   commonData: GetCommonDataQuery;
@@ -33,12 +33,15 @@ type HomeProps = {
   homePageData: GetHomePageDataQuery;
 };
 
-function Home({ commonData, tableBannersData, homePageData, t }: HomeProps) {
+function Home({ commonData, tableBannersData, homePageData }: HomeProps) {
+  const { t } = useTranslation();
   const homePage = homePageData.indexPages?.data?.[0];
   const tableData = useOptionalFactory(
-    tableBannersData?.tableBanners?.data.map((bannersData) => ({
-      ...bannersData.attributes,
-    })),
+    tableBannersData?.tableBanners?.data
+      .map((bannersData) => ({
+        ...bannersData.attributes,
+      }))
+      ?.filter(Boolean) as RowDataType[],
     [tableBannersData],
   );
 
@@ -57,7 +60,13 @@ function Home({ commonData, tableBannersData, homePageData, t }: HomeProps) {
       mainLinks={mainLinks}
       topGames={topGames}
       footerLinks={footerLinks}
-      seoData={homePage?.attributes?.seo ?? { metaTitle: "Home" }}
+      seoData={
+        homePage?.attributes?.seo ?? {
+          metaTitle: "Home",
+          metaDescription: "",
+          canonicalUrl: "",
+        }
+      }
     >
       <main>
         <Grid gap="30px">

@@ -9,7 +9,7 @@ import { PostsStack } from "@/components/Content/PostsStack/PostsStack";
 import { WithHeader } from "@/components/Content/WithHeader";
 import { Layout } from "@/components/Layout/Layout";
 import { useMQ } from "@/hooks/mediaQueries/useMQ";
-import { GetStaticPaths, GetStaticProps } from "next";
+import { GetStaticPathsContext, GetStaticProps } from "next";
 import { getUrqlClient } from "@/utils/urql";
 import {
   GetArticlePageDataDocument,
@@ -70,7 +70,7 @@ export default function Article({ commonData, articlePageData }: ArticleProps) {
                     href: "/",
                     text: t("button-show-game-rating"),
                   }}
-                  banners={topBanners}
+                  banners={topBanners ?? []}
                 />
               </WrapperContainer>
             </Wrapper>
@@ -113,7 +113,7 @@ export default function Article({ commonData, articlePageData }: ArticleProps) {
   );
 }
 
-export const getStaticPaths: GetStaticPaths = async ({ locales }) => {
+export const getStaticPaths = async ({ locales }: GetStaticPathsContext) => {
   const { client } = getUrqlClient();
 
   const articlesResponse = await client.query<
@@ -125,12 +125,17 @@ export const getStaticPaths: GetStaticPaths = async ({ locales }) => {
   const articles = articlesResponse?.data?.articlePages?.data ?? [];
 
   // Generate paths based on the fetched data
-  const paths = articles.flatMap(({ attributes: { urlSlug } }) => {
-    return locales?.map((locale) => ({
-      params: { articleId: urlSlug },
-      locale,
-    }));
-  });
+  const paths = articles
+    .flatMap(({ attributes }) => {
+      if (!attributes) return;
+      const { urlSlug } = attributes;
+
+      return locales?.map((locale) => ({
+        params: { articleId: urlSlug },
+        locale,
+      }));
+    })
+    ?.filter(Boolean);
 
   return {
     paths,

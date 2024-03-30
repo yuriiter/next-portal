@@ -19,7 +19,7 @@ export const BestNews = ({ newsPosts, className }: BestNewsProps) => {
       <div className="flex flex-col gap-3 items-stretch">
         {newsPosts.length > 0 ? (
           newsPosts.map(({ date, href, text }, idx) => (
-            <BestNewsPost key={idx} text={text} href={href} date={date} />
+            <BestNewsPost key={idx} text={text ?? ""} href={href} date={date} />
           ))
         ) : (
           <p className="text-gray-300">{t("side-news-no-data")}</p>

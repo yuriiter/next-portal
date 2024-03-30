@@ -1,5 +1,5 @@
 import { TopBanners } from "@/components/Content/TopBanners";
-import { TableContent } from "@/components/Content/TableContent";
+import { RowDataType, TableContent } from "@/components/Content/TableContent";
 import { Wrapper } from "@/components/Content/Wrapper";
 import { WrapperContainer } from "@/components/Content/WrapperContainer";
 import { Grid } from "@/components/Grid/Grid";
@@ -43,9 +43,11 @@ export default function Contact({
   const contactPage = contactPageData.contactPages?.data?.[0];
 
   const tableData = useOptionalFactory(
-    tableBannersData?.tableBanners?.data.map((bannersData) => ({
-      ...bannersData.attributes,
-    })),
+    tableBannersData?.tableBanners?.data
+      .map((bannersData) => ({
+        ...bannersData.attributes,
+      }))
+      ?.filter(Boolean) as RowDataType[],
     [tableBannersData],
   );
   const { topBanners, mainLinks, topGames, footerLinks } =
@@ -61,7 +63,13 @@ export default function Contact({
       mainLinks={mainLinks}
       topGames={topGames}
       footerLinks={footerLinks}
-      seoData={contactPage?.attributes?.seo ?? { metaTitle: "Contact" }}
+      seoData={
+        contactPage?.attributes?.seo ?? {
+          metaTitle: "Contact",
+          metaDescription: "",
+          canonicalUrl: "",
+        }
+      }
     >
       <main>
         <Grid gap="30px">
@@ -126,7 +134,7 @@ export const getStaticProps: GetStaticProps<ContactProps> = async ({
       commonData: commonDataResponse?.data ?? {},
       tableBannersData: tableBannersDataResponse?.data ?? {},
       contactPageData: contactPageDataResponse?.data ?? {},
-      ...(await serverSideTranslations(locale)),
+      ...(await serverSideTranslations(locale ?? "en")),
     },
     revalidate: 60,
   };
