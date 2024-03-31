@@ -18,9 +18,9 @@ services:
     hostname: strapi
     env_file:
       - ./strapi/.env
-      - ./strapi/.env.production
-    expose:
-      - 1337
+      - ./strapi/.env
+    ports:
+      - "1337:1337"
 
   nginx:
     build:
