@@ -54,6 +54,7 @@ FROM nginx:1.25.4-alpine as nginx
 RUN rm /etc/nginx/nginx.conf /etc/nginx/conf.d/default.conf
 COPY ./nginx/nginx.conf /etc/nginx
 COPY --from=client_build /app/.next /usr/share/nginx/html
+# COPY ./nginx/server.crt ./nginx/server.key /etc/nginx/ssl/
 # COPY --from=client_build /app/out /usr/share/nginx/html
 
 
